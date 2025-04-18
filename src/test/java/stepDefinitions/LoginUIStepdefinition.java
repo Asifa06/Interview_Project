@@ -1,8 +1,12 @@
+package stepDefinitions;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import org.openqa.selenium.WebDriver;
+
+import Pages.LoginPage;
 
 public class LoginUIStepdefinition {
 
@@ -11,12 +15,13 @@ public class LoginUIStepdefinition {
 
     // Assuming you have a LoginPage class with methods to interact with the login
     // page
-    LoginPage loginPage = new LoginPage();
+    LoginPage loginpage = new LoginPage();
+    // LoginPage loginPage = new LoginPage();
 
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
         // Code to navigate to the login page
-        loginPage.the_user_is_on_the_login_page();
+        loginpage.the_user_is_on_the_login_page();
         System.out.println("User is on the login page");
     }
 
