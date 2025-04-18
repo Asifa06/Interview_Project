@@ -3,13 +3,18 @@ package Pages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class LoginPage {
 
+    WebDriver driver;
+
     // Code to navigate to the login page
+
     public void the_user_is_on_the_login_page() {
-        System.setProperty("webdriver.chrome.driver", "/workspace/interview-test-04-2025/src/test/resources/Drivers");
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://example.com/login");
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get("https://8000-asifa06-interviewtest04-49qcjt0qba9.ws-eu118.gitpod.io/");
     }
 
     // Code to enter valid credentials

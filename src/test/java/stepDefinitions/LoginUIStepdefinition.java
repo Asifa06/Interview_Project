@@ -4,7 +4,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import Pages.LoginPage;
 
@@ -20,7 +22,6 @@ public class LoginUIStepdefinition {
 
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
-        // Code to navigate to the login page
         loginpage.the_user_is_on_the_login_page();
         System.out.println("User is on the login page");
     }
