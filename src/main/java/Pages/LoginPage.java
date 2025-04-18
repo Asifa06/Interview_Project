@@ -1,9 +1,11 @@
-
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class LoginPage {
 
     // Code to navigate to the login page
     public void the_user_is_on_the_login_page() {
+        System.setProperty("webdriver.chrome.driver", "/workspace/interview-test-04-2025/src/test/resources/Drivers");
         WebDriver driver = new ChromeDriver();
         driver.get("https://example.com/login");
     }
