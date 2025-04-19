@@ -12,9 +12,14 @@ public class LoginPage {
     // Code to navigate to the login page
 
     public void the_user_is_on_the_login_page() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.get("https://8000-asifa06-interviewtest04-49qcjt0qba9.ws-eu118.gitpod.io/");
+        try{
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            driver.get("http://localhost:8000");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
     }
 
     // Code to enter valid credentials
