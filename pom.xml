@@ -14,8 +14,9 @@
         <gherkin.version>15.0.2</gherkin.version>
         <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.5.2</maven.surefire.plugin.version>
-        <maven.compiler.source>$java.version</maven.compiler.source>
-        <maven.surefire.source>$java.version</maven.surefire.source>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.surefire.source>${java.version}</maven.surefire.source>
+        <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
 
 
@@ -42,22 +43,13 @@
             <version>${cucumber.version}</version>
             </dependency>
 
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-gherkin</artifactId>
-            <version>${cucumber.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>gherkin</artifactId>
             <version>${gherkin.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.microsoft.playwright</groupId>
-            <artifactId>playwright</artifactId>
-            <version>1.49.0</version>
-        </dependency>
+       
         <!-- https://mvnrepository.com/artifact/net.serenity-bdd/serenity-core -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
@@ -88,25 +80,14 @@
         </dependency>
 
 
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.27.0</version>
+</dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.31.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.4.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.28.1</version>  <!-- Ensure this is the same version as selenium-java -->
-        </dependency>
-
+      
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
@@ -136,56 +117,66 @@
     <version>2.0.17</version>
     <scope>test</scope>
 </dependency>
+	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>2.18.2</version>
+</dependency>
 
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.18.2</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-annotations</artifactId>
+    <version>2.18.2</version>
+</dependency>
 
 
     </dependencies>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
+            <version>${maven.compiler.plugin.version}</version>
             <configuration>
                 <source>${java.version}</source>  <!-- Java version -->
                 <target>${java.version}</target>
             </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <include>TestRunner.java</include>
-                    </includes>
-                    <systemPropertyVariables>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-            <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>exec-maven-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>docker-up</id>
-          <phase>pre-integration-test</phase>
-          <goals>
-            <goal>exec</goal>
-          </goals>
-          <configuration>
-            <executable>docker</executable>
-            <arguments>
-              <argument>compose</argument>
-              <argument>up</argument>
-              <argument>-d</argument>
-            </arguments>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-            
-        </plugins>
-    </build>
+        </plugin>
+        
+       <plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>3.1.0</version>
+  <executions>
+    <execution>
+      <id>generate-allure-report</id>
+      <phase>verify</phase>
+      <goals>
+        <goal>exec</goal>
+      </goals>
+      <configuration>
+        <executable>allure</executable>
+        <arguments>
+          <argument>generate</argument>
+          <argument>${project.build.directory}/allure-results</argument>
+          <argument>--clean</argument>
+          <argument>-o</argument>
+          <argument>${project.build.directory}/allure-report</argument>
+        </arguments>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+
+    </plugins>
+</build>
 </project>

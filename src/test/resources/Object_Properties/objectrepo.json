@@ -1,0 +1,19 @@
+{
+  "loginPage": {
+    "loginpagebutton": "xpath|//*[@id='app']/div/div/div/header/nav/a[1]",
+	"username":"xpath|//*[@id='email']",
+    "password": "xpath|//*[@id='password']",
+    "loginButton": "xpath|//*[@id='app']/div/div[2]/form/div[4]/button"
+  },
+  "homepage":{
+	"name":"xpath|//*[@id='app']/div/nav/div[1]/div/div[2]/div/div/div/span/button",
+	"profile":"xpath|//*[@id='app']/div/nav/div[1]/div/div[2]/div/div/div[3]/div/a",
+	"currentpassword":"xpath|//*[@id='current_password']",
+	"newpassword":"xpath|//*[@id='password']",
+	"confirmpassword":"xpath|//*[@id='password_confirmation']",
+	"savebutton":"xpath|//*[@id='app']/div/main/div/div/div[2]/section/form/div[4]/button",
+	"logout":"xpath|//*[@id='app']/div/nav/div[1]/div/div[2]/div/div/div[3]/div/button"
+ }
+  }
+  
+  

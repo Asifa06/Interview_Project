@@ -1,10 +1,13 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -15,26 +18,47 @@ public class LoginUIStepdefinition {
     WebDriver driver;
     LoginPage loginpage = new LoginPage();
 
-    @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() {
-        try{
-            loginpage.the_user_is_on_the_login_page();
-        } catch (Exception e) {
-                e.printStackTrace();
-                
-        }
-        
+    
+    @Given("the user login with {string} credentials")
+    public void the_user_enters_valid_credentials(String credentials) {
+    	try {
+    		loginpage.the_user_enters_valid_credentials(credentials);
+    	}catch(Exception e) {
+    		   Assert.fail("Fails while login with "+credentials+" password");
+
+    	}
     }
 
-    @When("the user enters valid credentials")
-    public void the_user_enters_valid_credentials() {
-        // Code to enter valid credentials
-        System.out.println("User enters valid credentials");
+    @Then("user update the password successfully")
+    public void update_password() {
+    	try {
+    		loginpage.update_password();
+    	}catch(Exception e) {
+    		Assert.fail("Fails while updating the password");
+    	}
+ 
     }
+    
+    @Then("logout from the application")
+    
+    public void logout() {
+		try {
+			loginpage.logout();
+		}catch(Exception e) {
+			Assert.fail("Fails while logging out from the application");
+		}
+	}
+    
+    @And ("validate the user is on the home page")
+    public void validate_homepage() {
+		try {
+			loginpage.validate_homepage();
+		}catch(Exception e) {
+			Assert.fail("Fails while validating the home page");
+		}
+	}
+	
 
-    @Then("the user should be redirected to the dashboard")
-    public void the_user_should_be_redirected_to_the_dashboard() {
-        // Code to verify redirection to the dashboard
-        System.out.println("User is redirected to the dashboard");
-    }
-}
+	}
+    
+    
