@@ -8,7 +8,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -19,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.icu.impl.Assert;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Allure;
 
 public class Commonmethods {
     
@@ -105,5 +109,22 @@ public class Commonmethods {
         }
     }
     
+    public static void captureScreenshot(WebDriver driver, String screenshotName) {
+        // Take screenshot and store it as a file
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        
+        // Define the destination path for the screenshot
+        String destinationPath = "target/allure-results/screenshots/" + screenshotName + ".png";
+        
+        try {
+            // Save the screenshot to the desired path
+            FileUtils.copyFile(screenshot, new File(destinationPath));
+            
+            // Attach the screenshot to the Allure report
+            Allure.addAttachment(screenshotName, "image/png", new FileInputStream(screenshot), ".png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
  
     }

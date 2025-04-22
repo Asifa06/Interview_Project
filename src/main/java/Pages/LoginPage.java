@@ -55,33 +55,23 @@ public class LoginPage {
     	 
     	 driver.get(Commonmethods.getCredential("APP_URL")); // Use environment variable
          driver.manage().window().maximize();
+         Commonmethods.captureScreenshot(driver, "Frontpage");
     	 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     	 wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(Commonmethods.getLocator("loginPage","loginpagebutton"))));
     	 driver.findElement(Commonmethods.getLocator("loginPage","loginpagebutton")).click();
     	 Commonmethods.switchtowindow(driver,"Log in - Kmbal Movies");
     	 
-    	 
-    	 System.out.println(encryptedusername);
-    	 System.out.println(encrypt_decrypt.decrypt(encryptedusername, secretKey));
-    	 System.out.println(encryptedPassword);
-    	 System.out.println(encrypt_decrypt.decrypt(encryptedPassword, secretKey));
-    	 System.out.println(encryptednewpassword);
-    	 System.out.println(encrypt_decrypt.decrypt(encryptednewpassword, secretKey));
-    	 
+    	 Commonmethods.captureScreenshot(driver, "LoginPage");
     	 WebElement usernameField = wait.until(ExpectedConditions.presenceOfElementLocated(Commonmethods.getLocator("loginPage","username")));
     	 usernameField.sendKeys(encrypt_decrypt.decrypt(encryptedusername, secretKey));
-    	 //usernameField.sendKeys(Commonmethods.getCredential("Username"));
     	 WebElement passwordField = wait.until(ExpectedConditions.presenceOfElementLocated(Commonmethods.getLocator("loginPage","password")));
     	 
     	 if(credentials.equalsIgnoreCase("valid")) {
     		 
-    		 passwordField.sendKeys(encrypt_decrypt.decrypt(encryptedPassword, secretKey));
-    		// passwordField.sendKeys(Commonmethods.getCredential("Password"));
-    	
+    		 passwordField.sendKeys(encrypt_decrypt.decrypt(encryptedPassword, secretKey));    	
 			 
 		}else if(credentials.equalsIgnoreCase("updated")) {
 			passwordField.sendKeys(encrypt_decrypt.decrypt(encryptednewpassword, secretKey));
-//			passwordField.sendKeys(Commonmethods.getCredential("new_Password"));
 	
 		}else {
 				 Assert.fail("Invalid credentials");
@@ -107,7 +97,7 @@ public class LoginPage {
         try {
         	System.out.println(driver.getTitle());
         	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        	System.out.println(Commonmethods.getLocator("homepage","name"));
+        	Commonmethods.captureScreenshot(driver, "Homepage");
         	 WebElement name = wait.until(ExpectedConditions.elementToBeClickable(Commonmethods.getLocator("homepage","name")));
         	 driver.findElement(Commonmethods.getLocator("homepage","name")).click();
       
@@ -115,11 +105,11 @@ public class LoginPage {
         	 driver.findElement(Commonmethods.getLocator("homepage","profile")).click();
         	 
         	 Commonmethods.switchtowindow(driver,"Profile - Kmbal Movies");
-        	 
+        	 Commonmethods.captureScreenshot(driver, "ProfilePage");
         	 JavascriptExecutor js = (JavascriptExecutor) driver;
          	js.executeScript("window.scrollBy(0, 500)");
          	
-         	
+         	Commonmethods.captureScreenshot(driver, "UpdatePasswordpage");
         	 WebElement currentpassword = wait.until(ExpectedConditions.presenceOfElementLocated(Commonmethods.getLocator("homepage","currentpassword")));
         	 currentpassword.sendKeys(encrypt_decrypt.decrypt(encryptedPassword, secretKey));
         	 WebElement newpassword = wait.until(ExpectedConditions.presenceOfElementLocated(Commonmethods.getLocator("homepage","newpassword")));
@@ -141,27 +131,19 @@ public class LoginPage {
 			WebElement logout = wait.until(ExpectedConditions.elementToBeClickable(Commonmethods.getLocator("homepage","logout")));
 			logout.click();
 			Commonmethods.switchtowindow(driver,"Log in - Kmbal Movies");
+			Commonmethods.captureScreenshot(driver, "Front");
 			Thread.sleep(2000);
 		}catch(Exception e) {
 			Assert.fail("Fails while logout");
 		}
 	}
     
-    public void login_with_updated_password() {
-    			try {
-    				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    		    	 wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(Commonmethods.getLocator("loginPage","loginpagebutton"))));
-    		    	 driver.findElement(Commonmethods.getLocator("loginPage","loginpagebutton")).click();
-    		    	 Commonmethods.switchtowindow(driver,"Log in - Kmbal Movies");
-    			}catch(Exception e) {
-					Assert.fail("Fails while login with updated password");
-				}
-    }
+
     public void validate_homepage() {
     			try {	
     				Thread.sleep(2000);
     				if(driver.getTitle().equals("Movies - Kmbal Movies")) {
-						System.out.println("User is on the home page");
+    					Commonmethods.captureScreenshot(driver, "Home");
 						}else {
 							Assert.fail("User is not on the home page");
 						}
