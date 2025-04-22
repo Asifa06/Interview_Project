@@ -6,7 +6,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Base64;
 import java.util.Properties;
 import java.util.Scanner;
