@@ -13,9 +13,12 @@ import java.util.Scanner;
 public class encrypt_decrypt {
 
     private static final String ALGORITHM = "AES";
-    public static String secretKey = "1234567890123456";
+    public static String secretKey = System.getenv("encryptionKey");
     
     public static void main(String[] args) {
+    	 if (secretKey == null || secretKey.length() != 16) {
+             throw new IllegalArgumentException("AES secret key not set properly in environment variables.");
+         }
         Scanner scanner = new Scanner(System.in);
 
         try {
@@ -31,12 +34,12 @@ public class encrypt_decrypt {
             System.out.println("Encrypted Password: " + encryptedPassword);
             
             // Store the encrypted password in the properties file
-            Properties properties = new Properties();
-            properties.setProperty("password", encryptedPassword);
-            try (FileOutputStream fileOut = new FileOutputStream("src/test/resources/Configuration/credentials.properties")) {
-                properties.store(fileOut, "Credentials File");
-                System.out.println("Password encrypted and stored successfully!");
-            }
+//            Properties properties = new Properties();
+//            properties.setProperty("password", encryptedPassword);
+//            try (FileOutputStream fileOut = new FileOutputStream("src/test/resources/Configuration/configuration.properties")) {
+//                properties.store(fileOut, "Credentials File");
+//                System.out.println("Password encrypted and stored successfully!");
+//            }
 
             // If you want to decrypt the password later:
             String decryptedPassword = decrypt(encryptedPassword, secretKey);

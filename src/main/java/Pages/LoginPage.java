@@ -59,7 +59,7 @@ public class LoginPage {
     	 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     	 wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(Commonmethods.getLocator("loginPage","loginpagebutton"))));
     	 driver.findElement(Commonmethods.getLocator("loginPage","loginpagebutton")).click();
-    	 Commonmethods.switchtowindow(driver,"Log in - Kmbal Movies");
+    	 Commonmethods.switchtowindow(driver,"Log in - Movies");
     	 
     	 Commonmethods.captureScreenshot(driver, "LoginPage");
     	 WebElement usernameField = wait.until(ExpectedConditions.presenceOfElementLocated(Commonmethods.getLocator("loginPage","username")));
@@ -82,7 +82,7 @@ public class LoginPage {
     	 
     	 loginBtn.click();
     	 
-    	 Commonmethods.switchtowindow(driver,"Movies - Kmbal Movies");
+    	 Commonmethods.switchtowindow(driver,"Movies - Movies");
     	 
     	 
      }catch(Exception e){
@@ -104,7 +104,7 @@ public class LoginPage {
         	 WebElement profile = wait.until(ExpectedConditions.elementToBeClickable(Commonmethods.getLocator("homepage","profile")));
         	 driver.findElement(Commonmethods.getLocator("homepage","profile")).click();
         	 
-        	 Commonmethods.switchtowindow(driver,"Profile - Kmbal Movies");
+        	 Commonmethods.switchtowindow(driver,"Profile - Movies");
         	 Commonmethods.captureScreenshot(driver, "ProfilePage");
         	 JavascriptExecutor js = (JavascriptExecutor) driver;
          	js.executeScript("window.scrollBy(0, 500)");
@@ -130,7 +130,7 @@ public class LoginPage {
 			name.click();
 			WebElement logout = wait.until(ExpectedConditions.elementToBeClickable(Commonmethods.getLocator("homepage","logout")));
 			logout.click();
-			Commonmethods.switchtowindow(driver,"Log in - Kmbal Movies");
+			Commonmethods.switchtowindow(driver,"Log in - Movies");
 			Commonmethods.captureScreenshot(driver, "Front");
 			Thread.sleep(2000);
 		}catch(Exception e) {
@@ -142,7 +142,7 @@ public class LoginPage {
     public void validate_homepage() {
     			try {	
     				Thread.sleep(2000);
-    				if(driver.getTitle().equals("Movies - Kmbal Movies")) {
+    				if(driver.getTitle().equals("Movies - Movies")) {
     					Commonmethods.captureScreenshot(driver, "Home");
 						}else {
 							Assert.fail("User is not on the home page");

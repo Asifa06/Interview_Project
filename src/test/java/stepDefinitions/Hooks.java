@@ -17,6 +17,7 @@ public class Hooks {
     @After
     public void tearDown() {
         // Quit the WebDriver here
+    	
         if (LoginPage.driver != null) {
         	LoginPage.driver.quit();
             System.out.println("Driver closed after each test");
