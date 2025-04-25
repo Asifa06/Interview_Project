@@ -1,6 +1,6 @@
 QA Interview Project – Movie Reviews Application
 📌 Overview
-This project is part of the KMBAL QA Engineer pre-interview test. It is a test automation framework built to validate the functionalities of a Movie Reviews application. The tests cover UI layers using BDD principles.
+This project is part of the pre-interview test. It is a test automation framework built to validate the functionalities of a Movie Reviews application. The tests cover UI layers using BDD principles.
 
 🚀 Tech Stack Used
 Java 23
